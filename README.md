@@ -6,7 +6,7 @@
 pip install pygame
 
 
-## 如使用python2，请将tkinter都改成Tkinter，不然会报错！
+## 如使用python2，请将tkinter都改成Tkinter，并修改from tkinter import messagebox as tkmessagebox为from Tkinter import tkmessagebox 不然会报错！
 
 ## 本版本介绍
 
