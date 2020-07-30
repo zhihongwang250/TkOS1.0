@@ -31,4 +31,5 @@ pip install pygame
 
 计算器更人性化
 
+可检测是否为Python2
 # 本作品还会持续更新！
