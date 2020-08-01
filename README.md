@@ -21,7 +21,6 @@ pip install pygame
 
 修复一些bug
 
-支持多国语言
 
 听歌曲功能更人性化
 
@@ -32,4 +31,6 @@ pip install pygame
 计算器更人性化
 
 可检测是否为Python2
+
+搭配一个聊天区（网址https://gitter.im/TkOS10/community）
 # 本作品还会持续更新！
