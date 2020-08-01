@@ -1,9 +1,11 @@
 # -*coding:UTF-8*-
+import sys
 import tkinter as tk
 from tkinter import Menu
 from tkinter import messagebox as tkmessagebox
 from tkinter import simpledialog
 from tkinter import PhotoImage
+from tkinter import Label
 from pygame import mixer
 import tkinter.font as tkFont
 from tkinter import Button
@@ -13,6 +15,7 @@ import random # 猜数字模块要用到
 import webbrowser
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+# --------------
 ran=0
 m=0
 a=0
@@ -20,6 +23,7 @@ b=0
 ca=0
 guo=0
 close=0
+# -------------
 def guanyu():
     tkmessagebox.showinfo('关于TkOS','TkOS1.0  制作人：zhihongwang250，保留一切权利!')
 def gameing():
@@ -38,25 +42,24 @@ def game():
     if kaishi==True:
         gameing()
 def nidedaan():
-    mixer.init()
-    mixer.music.load("你的答案.wav")
-    mixer.music.play()
+    pygame.mixer.init()
+    pygame.mixer.music.load("你的答案.wav")
+    pygame.mixer.music.play()
     ww=tkmessagebox.askyesno('播放音乐','正在播放【你的答案】，播放完后会自动退出播放程序,点击否停止播放')
     if ww==True:
         close=1
     else:
         close=0
-        mixer.music.stop()
+        pygame.mixer.music.stop()
 def xiashan():
-    mixer.init()
-    mixer.music.load("下山.wav")
-    mixer.music.play()
+    pygame.mixer.init()
+    pygame.mixer.music.load("下山.wav")
+    pygame.mixer.music.play()
     cc=tkmessagebox.askyesno('播放音乐','正在播放【下山】，播放完后会自动退出播放程序,点击否停止播放')
     if cc==True:
-        close=1
+        pass
     else:
-        close=0
-        mixer.music.stop()
+        pygame.mixer.music.stop()
 def git():
     webbrowser.open('https://github.com/zhihongwang250/TkOS1.0')
 def china():
@@ -68,21 +71,22 @@ def brazil():
 def india():
     webbrowser.open('https://voice.baidu.com/act/newpneumonia/newpneumonia?city=%E5%8D%B0%E5%BA%A6-%E5%8D%B0%E5%BA%A6')
 def jisuanqi():
-    a=simpledialog.askstring('计算器','请输入A=？')
-    b=simpledialog.askstring('计算器','请输入B=？')
-    ca=simpledialog.askstring('计算器','请输入加减乘除（汉字加减乘除）?')
-    if ca=='加':
-        tkmessagebox.showinfo('计算器','结果是'+str(a+b))
-    elif ca=='减':
-        tkmessagebox.showinfo('计算器','结果是'+str(a-b))
-    elif ca=='乘':
-        tkmessagebox.showinfo('计算器','结果是'+str(a*b))
-    elif ca=='除':
-        tkmessagebox.showinfo('计算器','结果是'+str(a/b))
-    else:
-        tkmessagebox.showinfo('计算器','您输入的操作无效！')
+    while True:
+        number = simpledialog.askstring('计算器','请输入数学表达式 (按ctrl+c结束): ')
+        if not number:
+            return
+        try:
+            tkmessagebox.showinfo('计算结果是：',eval(number)) # 计算数字 eval
+            break
+        except Exception:
+            tkmessagebox.showerror('请注意！','表达式出现错误')
+        finally:
+            print('\n')
 def closer():
     mixer.music.stop()
+def liao():
+    webbrowser.open('https://gitter.im/TkOS10/community')
+# --------------
 root = tk.Tk()
 root.title("TkOS")
 root.iconbitmap("tkos.ico")
@@ -96,11 +100,8 @@ menubar.add_command(label='简易计算器',command=jisuanqi)
 root.config(menu=menubar)
 filemenu.add_separator()
 menubar.add_cascade(label='播放音乐', menu=filemenu)
-if close==0:
-    filemenu.add_command(label='你的答案', command=nidedaan)
-    filemenu.add_command(label='下山', command=xiashan)
-else:
-    filemenu.add_command(label='关闭所有声音', command=closer)
+filemenu.add_command(label='你的答案', command=nidedaan)
+filemenu.add_command(label='下山', command=xiashan)
 root.config(menu=menubar)
 bb = tk.Menu(menubar, tearoff=0)
 bb.add_separator()
@@ -114,8 +115,12 @@ bb.add_separator()
 root.config(menu=menubar)
 root.geometry("400x200")
 ft = tkFont.Font(family='等线', size=30, weight=tkFont.NORMAL)
-frame2 = tk.Frame(root)
-theLabel = tk.Label(root, text='         用Tk,写OS！',font=ft).grid()
-theButton = Button(frame2, text='打开项目的github界面', command=git)
+theLabel = tk.Label(root, text='     用Tk,写OS！',font=ft)
+theLabel.pack()
+theButton = Button(text='打开项目的github界面', command=git)
 theButton.pack()
+button2=Button(text='关闭所有音乐',command=closer)
+button2.pack()
+button3=Button(text='去到聊天区',command=liao)
+button3.pack()
 root.mainloop()
