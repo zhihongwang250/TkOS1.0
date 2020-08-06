@@ -130,7 +130,7 @@ def india():
     webbrowser.open('https://voice.baidu.com/act/newpneumonia/newpneumonia?city=%E5%8D%B0%E5%BA%A6-%E5%8D%B0%E5%BA%A6')
 def jisuanqi():
     while True:
-        number = simpledialog.askstring('计算器','请输入数学表达式 (按ctrl+c结束): ')
+        number = simpledialog.askstring('计算器','请输入数学表达式: ')
         if not number:
             return
         try:
